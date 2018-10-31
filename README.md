@@ -1,7 +1,10 @@
 ## README
 
 The aim of the project is to learn the encryption methodology and best practice.
+I found this url where Lokesh Gupta did a very good job to explain different password encryption.
+https://howtodoinjava.com/security/how-to-generate-secure-password-hash-md5-sha-pbkdf2-bcrypt-examples/
 
+Next step will be to use Spring Security and have a good understanding of hashing/encryption methodology.
 
 #### This repository
 
