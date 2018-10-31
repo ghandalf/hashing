@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration scan="true">
+	<include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+	
+    <property name="FILE_NAME_APP" value="hashing" />
+    <property name="FILE_NAME_MAIN" value="${FILE_NAME_APP}.main" />
+    <property name="FILE_NAME_SPRING" value="${FILE_NAME_APP}.spring" />
+    <property name="FILE_NAME_ERROR" value="${FILE_NAME_APP}.error" />
+    <property name="LOG_PATH" value="${BUILD_FOLDER:-log}" />
+    
+    <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} [%file:%line] - %msg%n" />
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="APP-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/${FILE_NAME_APP}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="MAIN-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/${FILE_NAME_MAIN}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="SPRING-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/${FILE_NAME_SPRING}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="ERROR-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/${FILE_NAME_ERROR}.log</file>
+        <encoder>
+            <pattern>${LOG_PATTERN}</pattern>
+            <charset>UTF8</charset>
+        </encoder>
+    </appender>
+
+    <appender name="THREAD" class="ch.qos.logback.classic.sift.SiftingAppender">
+        <discriminator>
+            <key>thread</key>
+            <defaultValue>unknown</defaultValue>
+        </discriminator>
+        <sift>
+            <appender name="FILE-${thread}" class="ch.qos.logback.core.FileAppender">
+                <file>${LOG_PATH}/${FILE_NAME_APP}.${thread}.log</file>
+                <append>false</append>
+                <layout class="ch.qos.logback.classic.PatternLayout">
+                    <pattern>${LOG_PATTERN}</pattern>
+                    <charset>UTF8</charset>
+                </layout>
+            </appender>
+        </sift>
+    </appender>
+
+    <logger name="org.spring" level="debug">
+        <appender-ref ref="SPRING-FILE" />
+        <appender-ref ref="MAIN-FILE" />
+    </logger>
+
+    <logger name="org.springframework" level="debug">
+        <appender-ref ref="SPRING-FILE" />
+        <appender-ref ref="MAIN-FILE" />
+    </logger>
+
+    <logger name="ca.ghandalf.tutorial.hashing" level="debug">
+        <appender-ref ref="APP-FILE" />
+        <appender-ref ref="MAIN-FILE" />
+    </logger>
+
+    <logger name="error" level="error">
+        <appender-ref ref="ERROR-FILE" />
+        <appender-ref ref="MAIN-FILE" />
+    </logger>
+
+    <root level="debug">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="MAIN-FILE" />
+    </root>
+
+</configuration>
