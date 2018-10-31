@@ -1,4 +1,4 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 public enum HashType {
 

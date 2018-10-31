@@ -13,17 +13,23 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		
+
 		<!-- To bad, I can't use jdk 11 due to M2E -->
 		<maven.compiler.source>10</maven.compiler.source>
 		<maven.compiler.target>10</maven.compiler.target>
 
 		<java.version>jdk-10.0.2</java.version>
 		<spring.boot.version>2.1.0.RELEASE</spring.boot.version>
+		<spring.security.version>5.1.1.RELEASE</spring.security.version>
 		<testng.version>6.14.3</testng.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-crypto</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-logging</artifactId>
@@ -38,36 +44,36 @@
 	</dependencies>
 
 	<build>
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-compiler-plugin</artifactId>
-					<version>3.8.0</version>
-					<configuration>
-						<source>${maven.compiler.source}</source>
-						<target>${maven.compiler.target}</target>
-					</configuration>
-				</plugin>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-toolchains-plugin</artifactId>
-					<version>1.1</version>
-					<executions>
-						<execution>
-							<goals>
-								<goal>toolchain</goal>
-							</goals>
-						</execution>
-					</executions>
-					<configuration>
-						<toolchains>
-							<jdk>
-								<version>${java.version}</version>
-								<vendor>oracle</vendor>
-							</jdk>
-						</toolchains>
-					</configuration>
-				</plugin>
-			</plugins>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.0</version>
+				<configuration>
+					<source>${maven.compiler.source}</source>
+					<target>${maven.compiler.target}</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-toolchains-plugin</artifactId>
+				<version>1.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>toolchain</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<toolchains>
+						<jdk>
+							<version>${java.version}</version>
+							<vendor>oracle</vendor>
+						</jdk>
+					</toolchains>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>

@@ -1,4 +1,4 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -6,22 +6,15 @@ import java.security.NoSuchAlgorithmException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class SHAHashing extends Hashing {
+public class MD5WithSatlAlgo extends Hashing {
 
-	private static final Logger logger = LoggerFactory.getLogger(SHAHashing.class);
+	private static final Logger logger = LoggerFactory.getLogger(MD5WithSatlAlgo.class);
 
-	@Override
 	public String compute(String password) throws NoSuchAlgorithmException {
 
 		logger.info("From {} class compute had been called.", this.getClass().getSimpleName());
 
-		return this.compute(password, HashType.SHA_1);
-	}
-
-	@Override
-	public String compute(String password, HashType type) throws NoSuchAlgorithmException {
-
-		MessageDigest messageDigest = MessageDigest.getInstance(type.value());
+		MessageDigest messageDigest = MessageDigest.getInstance(HashType.MD5.value());
 		messageDigest.update(getSalt());
 
 		byte[] hashesBytes = messageDigest.digest(password.getBytes());
@@ -33,6 +26,12 @@ public class SHAHashing extends Hashing {
 		}
 
 		return builder.toString();
+	}
+
+	@Override
+	public String compute(String password, HashType type) throws NoSuchAlgorithmException {
+
+		return this.compute(password);
 	}
 
 }

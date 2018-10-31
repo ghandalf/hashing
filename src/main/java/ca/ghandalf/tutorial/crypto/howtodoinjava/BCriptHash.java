@@ -1,4 +1,4 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 import java.security.NoSuchAlgorithmException;
 

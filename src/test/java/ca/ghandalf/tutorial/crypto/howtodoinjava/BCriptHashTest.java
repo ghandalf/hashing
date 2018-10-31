@@ -1,17 +1,21 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 import java.security.NoSuchAlgorithmException;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class MD5AlgoTest {
+import ca.ghandalf.tutorial.crypto.howtodoinjava.BCriptHash;
+import ca.ghandalf.tutorial.crypto.howtodoinjava.HashType;
 
-	private MD5Algo classUnderTest;
+public class BCriptHashTest {
+
+	private BCriptHash classUnderTest;
 	
 	@BeforeClass
 	public void setUp() {
-		classUnderTest = new MD5Algo();
+		classUnderTest = new BCriptHash();
 	}
 	
 	@Test
@@ -20,6 +24,9 @@ public class MD5AlgoTest {
 		String result = classUnderTest.compute("MyNameIs");
 		
 		System.out.format("%n\t\tHash Method: [%s], value to compute:[%s], result:[%s] %n%n", HashType.MD5.value(), password, result);
+		
+		System.out.format("passeword:[%s], result:[%s]%n", password, result);
+		
+		Assert.assertTrue(classUnderTest.validate(password, result));
 	}
-	
 }

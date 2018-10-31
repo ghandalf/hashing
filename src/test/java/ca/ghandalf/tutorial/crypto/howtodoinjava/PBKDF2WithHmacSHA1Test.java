@@ -1,4 +1,4 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 import java.security.NoSuchAlgorithmException;
 
@@ -7,6 +7,9 @@ import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import ca.ghandalf.tutorial.crypto.howtodoinjava.HashType;
+import ca.ghandalf.tutorial.crypto.howtodoinjava.PBKDF2WithHmacSHA1;
 
 public class PBKDF2WithHmacSHA1Test {
 

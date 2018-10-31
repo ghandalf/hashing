@@ -1,4 +1,4 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 // Copyright (c) 2006 Damien Miller <djm@mindrot.org>
 //

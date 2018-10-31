@@ -1,9 +1,12 @@
-package ca.ghandalf.tutorial.hashing;
+package ca.ghandalf.tutorial.crypto.howtodoinjava;
 
 import java.security.NoSuchAlgorithmException;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import ca.ghandalf.tutorial.crypto.howtodoinjava.HashType;
+import ca.ghandalf.tutorial.crypto.howtodoinjava.MD5WithSatlAlgo;
 
 public class MD5WithSatlAlgoTest {
 
