@@ -12,9 +12,27 @@ The aim of the project is to learn the encryption methodology and best practice.
 
 #### Set up
 
-You need to make sure you have the latest jdk install, take a look to the pom.xml file, 
-to find out the current jdk in used.<br>
-    `<java.version>jdk-11.0.1</java.version>`
+You need to make sure you have the jdk install. 
+Take a look to the pom.xml file, to find out the current jdk in used.
+
+    ```<java.version>jdk-10.0.2</java.version>```
+
+Unfortunalty, I would like to use jdk-11 but due to M2E. I need maven-compiler-plugin source and target at version 10.<br>
+
+```
+		<maven.compiler.source>10</maven.compiler.source>
+		<maven.compiler.target>10</maven.compiler.target>
+		...
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-compiler-plugin</artifactId>
+			<version>3.8.0</version>
+			<configuration>
+				<source>${maven.compiler.source}</source>
+				<target>${maven.compiler.target}</target>
+			</configuration>
+		</plugin>
+```
 
 I use [toolchains](https://maven.apache.org/guides/mini/guide-using-toolchains.html) so here is my my file under ~/.m2/toolchains.xml
 
@@ -55,7 +73,7 @@ At compilation, you will see those lines:
 
 ```
 [INFO] --- maven-toolchains-plugin:1.1:toolchain (default) @ hashing ---
-[INFO] Required toolchain: jdk [ vendor='oracle' version='jdk-11.0.1' ]
+[INFO] Required toolchain: jdk [ vendor='oracle' version='jdk-10.0.2' ]
 [INFO] Found matching toolchain for type jdk: JDK[/data/links/jdk]
 
 ```
@@ -76,3 +94,5 @@ Make sure that you have the latest jdk install.
 	    mvn clean install -DskipTests // will deploy each artifacts in your local repository
 ```
 
+### TODO ###
+Add and fix current tests

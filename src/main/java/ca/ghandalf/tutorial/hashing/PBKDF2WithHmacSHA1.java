@@ -10,12 +10,12 @@ import javax.crypto.spec.PBEKeySpec;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class PBKDF2WithHmacSHA1Hashing extends Hashing {
+public class PBKDF2WithHmacSHA1 extends Hashing {
 
-	private static final Logger logger = LoggerFactory.getLogger(PBKDF2WithHmacSHA1Hashing.class);
+	private static final Logger logger = LoggerFactory.getLogger(PBKDF2WithHmacSHA1.class);
 	
 	@Override
-	public String compute(String password) {
+	public String compute(String password) throws NoSuchAlgorithmException {
 		
 		logger.info("From {} class compute had been called.", this.getClass().getSimpleName());
 
@@ -30,9 +30,9 @@ public class PBKDF2WithHmacSHA1Hashing extends Hashing {
 
 			byte[] hash = factory.generateSecret(specification).getEncoded();
 
-			result = iterations + "" + toHex(getSalt()) + ":" + toHex(hash);
+			result = iterations + ":" + toHex(getSalt()) + ":" + toHex(hash);
 
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+		} catch (InvalidKeySpecException e) {
 			logger.error("{} algorithm implementation error.", e.getClass().getSimpleName());
 		}
 
@@ -40,11 +40,11 @@ public class PBKDF2WithHmacSHA1Hashing extends Hashing {
 	}
 
 	@Override 
-	public String compute(String password, HashType type) {
+	public String compute(String password, HashType type) throws NoSuchAlgorithmException {
 		return this.compute(password);
 	}
 
-	public boolean validate(String currentPassword, String storedPassword) {
+	public boolean validate(String currentPassword, String storedPassword) throws NoSuchAlgorithmException {
 
 		boolean result = false;
 		
@@ -68,7 +68,7 @@ public class PBKDF2WithHmacSHA1Hashing extends Hashing {
 			
 			result = comparativeValue == 0;
 
-		} catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
+		} catch (InvalidKeySpecException e) {
 			logger.error("{} algorithm implementation error.", e.getClass().getSimpleName());
 		}
 
@@ -82,7 +82,7 @@ public class PBKDF2WithHmacSHA1Hashing extends Hashing {
 
 		int padding = (array.length * 2) - hexadecimal.length();
 
-		return (padding > 0) ? String.format("%s %sd", 0, padding) + hexadecimal : hexadecimal;
+		return (padding > 0) ? String.format("%0" + padding + "d", 0) + hexadecimal : hexadecimal;
 	}
 
 	private byte[] fromHex(String value) {
@@ -91,7 +91,6 @@ public class PBKDF2WithHmacSHA1Hashing extends Hashing {
 
 		for (int i = 0; i < result.length; i++) {
 
-//			result[i] = Byte.parseByte(value.substring(2 * i, (2 * i + 2)), 16);
 			result[i] = (byte) Integer.parseInt(value.substring(2 * i, (2 * i) + 2), 16);
 		}
 

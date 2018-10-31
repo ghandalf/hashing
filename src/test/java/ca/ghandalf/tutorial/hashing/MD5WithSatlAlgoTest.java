@@ -1,5 +1,7 @@
 package ca.ghandalf.tutorial.hashing;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,7 +15,7 @@ public class MD5WithSatlAlgoTest {
 	}
 	
 	@Test
-	public void computeSuccesEncryption() {
+	public void computeSuccesEncryption() throws NoSuchAlgorithmException {
 		String password = "MyNameIs";
 		String result = classUnderTest.compute("MyNameIs");
 		

@@ -1,5 +1,7 @@
 package ca.ghandalf.tutorial.hashing;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -13,7 +15,7 @@ public class SHAHashingTest {
 	}
 
 	@Test
-	public void computeSuccesEncryption() {
+	public void computeSuccesEncryption() throws NoSuchAlgorithmException {
 		HashType type = HashType.SHA_1;
 
 		String password = "MyNameIs";

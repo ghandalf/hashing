@@ -1,24 +1,26 @@
 package ca.ghandalf.tutorial.hashing;
 
+import java.security.NoSuchAlgorithmException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PBKDF2WithHmacSHA1HashingTest {
+public class PBKDF2WithHmacSHA1Test {
 
-	private static final Logger logger = LoggerFactory.getLogger(PBKDF2WithHmacSHA1HashingTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(PBKDF2WithHmacSHA1Test.class);
 	
-	private PBKDF2WithHmacSHA1Hashing classUnderTest;
+	private PBKDF2WithHmacSHA1 classUnderTest;
 	
 	@BeforeClass
 	public void setUp() {
-		classUnderTest = new PBKDF2WithHmacSHA1Hashing();
+		classUnderTest = new PBKDF2WithHmacSHA1();
 	}
 	
 	@Test
-	public void computeSuccesEncryption() {
+	public void computeSuccesEncryption() throws NoSuchAlgorithmException {
 		String password = "MyNameIs";
 		String result = classUnderTest.compute("MyNameIs");
 		
